@@ -1,0 +1,135 @@
+\version "2.22.0"
+\include "english.ly"
+\header {
+  title = " 322장 세상의 헛된 신을 버리고 
+
+"
+}
+
+global = {
+  \time 4/4
+  \key d \major
+  \tempo 4=100
+}
+
+soprano = \transpose d ef {
+  \relative c' {
+  \global
+  fs2 fs4 g a2 d, e4. e8 fs4 g fs1 \break
+  
+  fs2 e4 d b'2 a a4. a8 g4 fs e1 \break
+  
+  fs2 fs4 g a2 d, b'4. b8 b4 fs g1  \break
+  
+  g2 fs4 e a d, d g fs2 e d1  \bar "||"    d2 d  \bar"|."
+  }
+}
+
+alto =\transpose d ef { 
+  \relative c' {
+  \global
+  d2 d4 cs d2 d d4. d8 cs4 cs d1 
+  
+  d2 cs4 d d2 d d4. d8 e4 d d2( cs)
+  
+  d2 d4 cs d2 c b4. d8 d4 d e1 
+  
+  e2 d4 cs d a b e d2 cs d1 b2 a 
+  }
+}
+
+tenor = \transpose d ef {
+  \relative c' {
+  \global
+  a2 a4 a a2 fs b4. b8 a4 a a1 
+  
+  a2 a4 a g2 a b4. b8 b4 b e,2 ( a)
+  
+  a2 a4 a a2 a d,4. g8 fs4 b b1 
+  
+  b2 a4 a a fs fs b a2 g fs1 g2 fs 
+  
+  
+  }
+}
+
+bass = \transpose d ef {
+  \relative c {
+  \global
+  d2 d4 e fs2 b, g4. g8 a4 a d1 
+  
+  d2 e4 fs g2 fs e4. e8 g,4 gs a1 
+  
+  d2 d4 e fs2 fs, g4. g8 b4 b e1 
+  
+  e2 a4 g fs d b g a2 a d1 g,2 d' 
+  }
+}
+
+verseOne = \lyricmode {
+  \set stanza = "1."
+ 세 상 의 헛 된 신 을 버 리 고 
+
+하 나 님 이 름 높 여 기 리 세 
+
+온 천 하 백 성 모 두 나 와 서 
+
+다 같 이 하 나 님 만 섬 기 세 
+
+  
+}
+
+verseTwo = \lyricmode {
+  \set stanza = "2."
+ 세 상 의 헛 된 우 상 버 리 고 
+
+인 간 의 모 든 부 귀 영 화 와 
+
+거 짓 과 불 의 모 두 버 리 고 
+
+온 전 히 하 나 님 만 섬 기 세 
+}
+
+verseThree = \lyricmode {
+  \set stanza = "3."
+ 주 님 의 백 성 서 로 헤 아 려 
+
+시 기 와 미 움 아 주 버 리 고 
+
+하 나 님 만 을 홀 로 섬 기 는 
+
+천 국 을 어 서 이 뤄 주 소 서 아 멘 
+
+  
+}
+
+\score {
+  \new ChoirStaff <<
+    \new Staff \with {
+      midiInstrument = "choir aahs"
+      instrumentName = \markup \center-column { S A }
+    } <<
+      \new Voice = "soprano" { \voiceOne \soprano }
+      \new Voice = "alto" { \voiceTwo \alto }
+    >>
+    \new Lyrics \with {
+      \override VerticalAxisGroup #'staff-affinity = #CENTER
+    } \lyricsto "soprano" \verseOne
+    \new Lyrics \with {
+      \override VerticalAxisGroup #'staff-affinity = #CENTER
+    } \lyricsto "soprano" \verseTwo
+    \new Lyrics \with {
+      \override VerticalAxisGroup #'staff-affinity = #CENTER
+    } \lyricsto "soprano" \verseThree
+    \new Staff \with {
+      midiInstrument = "choir aahs"
+      instrumentName = \markup \center-column { T B }
+    } <<
+      \clef bass
+      \new Voice = "tenor" { \voiceOne \tenor }
+      \new Voice = "bass" { \voiceTwo \bass }
+    >>
+  >>
+  \layout { }
+  \midi { }
+}
