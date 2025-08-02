@@ -3,7 +3,7 @@
 \header {
   title = "예배자"
   subtitle = "아무도 예배하지 않는"
-  tagline = "lilypond by KIM Hyeok"
+tagline = "Sheet music notated in Lilypond by Kim Hyeok."
   poet   = "설경욱"
 }
 
@@ -15,6 +15,7 @@
   \context {
     \Score
     \remove "Bar_number_engraver"
+    \remove "Volta_engraver"
   }
   \context {
     \Voice
@@ -80,12 +81,16 @@ verseTwo = \lyricmode {
 \score {
   <<
     \new ChordNames \chordNames
-    \new Staff { \melody }
+    \new Staff \with {
+        \consists "Volta_engraver"
+    }
+    { \melody }
     \addlyrics { \verse }
     \addlyrics { \verseTwo }
   >>
   \layout { indent = 0.0
-    ragged-last = ##f}
+    ragged-last = ##f
+  }
   \midi {
     \tempo 4=69
   }
